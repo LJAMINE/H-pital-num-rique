@@ -3,5 +3,8 @@
 <head><title>Clinique Digital</title></head>
 <body>
 <h1>Welcome to Clinique Digital!</h1>
+<h1>
+    this new commit
+</h1>
  </body>
 </html>
