@@ -1,0 +1,14 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
+    <persistence-unit name="cliniquePU">
+        <class>com.example.model.Patient</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/clinique"/>
+            <property name="javax.persistence.jdbc.user" value="clinique_user"/>
+            <property name="javax.persistence.jdbc.password" value="clinique_pass"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
