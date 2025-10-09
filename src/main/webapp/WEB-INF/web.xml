@@ -7,6 +7,11 @@
 
     <display-name>clinique-digital</display-name>
 
+    <!-- Weld Listener for CDI -->
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+    </listener>
+
     <!-- Example servlet mapping, adjust for your app -->
     <!--
     <servlet>

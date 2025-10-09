@@ -8,6 +8,7 @@ public class Admin extends Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+
     private long idAdmin;
 
     public long getIdAdmin() {
