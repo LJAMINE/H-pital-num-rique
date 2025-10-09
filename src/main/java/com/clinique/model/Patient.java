@@ -1,19 +1,13 @@
 package com.clinique.model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
 
-public class Patient extends Personne
-{
-    @Id
-//    Marks a field as the primary key of the entity/table.
+public class Patient extends Personne {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    Uses the database’s auto-increment feature (like MySQL’s AUTO_INCREMENT).
-
-    private Long idPatient;
     private double poids;
     private double taille;
 
@@ -22,13 +16,9 @@ public class Patient extends Personne
     private List<Consultation> consultations;
 
 
-    public Long getIdPatient() {
-        return idPatient;
-    }
+    //--------------------getter and setters-------------------
 
-    public void setIdPatient(Long idPatient) {
-        this.idPatient = idPatient;
-    }
+
 
     public double getPoids() {
         return poids;

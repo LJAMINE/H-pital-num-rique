@@ -1,13 +1,21 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
     <persistence-unit name="cliniquePU">
-        <class>com.clinique.example.model.Patient</class>
+        <class>com.clinique.model.Patient</class>
+        <class>com.clinique.model.Personne</class>
+        <class>com.clinique.model.Doctor</class>
+        <class>com.clinique.model.Admin</class>
+        <class>com.clinique.model.Consultation</class>
+        <class>com.clinique.model.Departement</class>
+        <class>com.clinique.model.Salle</class>
+
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/clinique"/>
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/clinique"/>-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql-db:3306/clinique"/>
             <property name="javax.persistence.jdbc.user" value="clinique_user"/>
             <property name="javax.persistence.jdbc.password" value="clinique_pass"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

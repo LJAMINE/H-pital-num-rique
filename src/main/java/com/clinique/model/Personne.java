@@ -2,19 +2,34 @@ package com.clinique.model;
 
 import jakarta.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Personne {
 
-public  abstract class Personne{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     protected String nom;
+
     @Column(nullable = false)
     protected String prenom;
+
     @Column(nullable = false, unique = true)
     protected String email;
+
     @Column(nullable = false)
     protected String motDePasse;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNom() {
         return nom;
