@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Patient extends Personne {
 
+
+
+
     private double poids;
     private double taille;
 

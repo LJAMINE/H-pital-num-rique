@@ -2,6 +2,9 @@ package com.clinique.model;
 
 import jakarta.persistence.*;
 
+
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Personne {
@@ -22,6 +25,10 @@ public abstract class Personne {
     @Column(nullable = false)
     protected String motDePasse;
 
+
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public Long getId() {
         return id;
