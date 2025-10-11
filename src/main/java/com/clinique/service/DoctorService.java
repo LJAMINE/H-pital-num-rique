@@ -49,8 +49,7 @@ public class DoctorService {
         return doctorRepository.update(doctor);
     }
 
-    // Delete doctor
-    public void deleteDoctor(Long id) {
+     public void deleteDoctor(Long id) {
         Doctor existing = doctorRepository.findById(id);
         if (existing == null) {
             throw new DoctorNotFoundException("Doctor not found for deletion.");
