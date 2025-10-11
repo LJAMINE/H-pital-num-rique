@@ -23,7 +23,7 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     @Override
     public List<T> findAll() {
-        return em.createQuery("SELECT e FROM"+entityClass.getSimpleName()+" e",entityClass).getResultList();
+        return em.createQuery("SELECT e FROM "+entityClass.getSimpleName()+" e",entityClass).getResultList();
      }
 
     @Override
