@@ -2,32 +2,32 @@ package com.clinique.repository;
 
 import com.clinique.model.Doctor;
 import com.clinique.model.Patient;
+import com.clinique.util.JPAUtil;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
-
 
 @Dependent
 @Named
 public class DoctorRepositoryImpl extends GenericRepositoryImpl<Doctor, Long> implements DoctorRepository {
-    @PersistenceContext
-    private EntityManager entityManager;
+    private static EntityManager createEntityManager() {
 
-    public DoctorRepositoryImpl() {
-        super(Doctor.class);
+        // Use the shared singleton factory
+        return JPAUtil.getEntityManagerFactory().createEntityManager();
     }
-
+    public DoctorRepositoryImpl() {
+        super(Doctor.class, createEntityManager());
+    }
 
 
     @Override
     public Doctor findByEmail(String email) {
-
         try {
-
-            return entityManager.createQuery(
-                            "SELECT p FROM Doctor p WHERE p.email = :email", Doctor.class)
+            return em.createQuery(
+                            "SELECT d FROM Doctor d WHERE d.email = :email", Doctor.class)
                     .setParameter("email", email)
                     .getSingleResult();
         } catch (NoResultException e) {

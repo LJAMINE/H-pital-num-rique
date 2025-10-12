@@ -1,20 +1,34 @@
 package com.clinique.repository;
 
 import com.clinique.model.Patient;
+import com.clinique.model.Personne;
+import com.clinique.util.JPAUtil;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.*;
 
 @Dependent
 @Named
 public class PatientRepositoryImpl extends GenericRepositoryImpl<Patient, Long> implements PatientRepository {
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
 
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("cliniquePU");
+
+//    // Static method to provide EntityManager
+//    private static EntityManager createEntityManager() {
+//        return emf.createEntityManager();
+//    }
+//
+//    public PatientRepositoryImpl() {
+//        super(Patient.class, createEntityManager());
+//    }
+private static EntityManager createEntityManager() {
+    // Use the shared singleton factory
+    return JPAUtil.getEntityManagerFactory().createEntityManager();
+}
     public PatientRepositoryImpl() {
-        super(Patient.class);
+        super(Patient.class, createEntityManager());
     }
 
     @Override
@@ -22,7 +36,7 @@ public class PatientRepositoryImpl extends GenericRepositoryImpl<Patient, Long> 
 
         try {
 
-            return entityManager.createQuery(
+            return em.createQuery(
                             "SELECT p FROM Patient p WHERE p.email = :email", Patient.class)
                     .setParameter("email", email)
                     .getSingleResult();
