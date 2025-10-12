@@ -10,6 +10,12 @@
 <body>
 <h2>Welcome, <%= user.getNom() %> <%= user.getPrenom() %>!</h2>
 <p>Your email: <%= user.getEmail() %></p>
+
+<ul>
+    <li><a href="departement">Manage Departments</a></li>
+    <li><a href="doctor">Manage Doctors</a></li>
+    <!-- Add more links as needed -->
+</ul>
 <!-- Add patient-specific content here -->
 <a href="logout">Logout</a></body>
 </html>
