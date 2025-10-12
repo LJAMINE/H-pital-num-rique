@@ -11,6 +11,5 @@
 <h2>Welcome, <%= user.getNom() %> <%= user.getPrenom() %>!</h2>
 <p>Your email: <%= user.getEmail() %></p>
 <!-- Add patient-specific content here -->
-<a href="../../logout">Logout</a>
-</body>
+<a href="logout">Logout</a></body>
 </html>
