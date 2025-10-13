@@ -79,12 +79,18 @@
     <p>Your email: <%= user.getEmail() %></p>
 
     <ul>
-        <li><a href="departement">Manage Departments</a></li>
-        <li><a href="doctor">Manage Doctors</a></li>
+<%--        <li><a href="admin/departement">Manage Departments</a></li>--%>
+    <a href="${pageContext.request.contextPath}/admin/departement">Manage Departments</a>
+
+<%--    <li><a href="admin/doctor">Manage Doctors</a></li>--%>
+    <a href="${pageContext.request.contextPath}/admin/doctor">Manage Doctors</a>
+
         <!-- Add more links as needed -->
     </ul>
 
-    <a class="logout-link" href="logout">Logout</a>
+    <a href="${pageContext.request.contextPath}/logout">logout</a>
+
+<%--    <a class="logout-link" href="logout">Logout</a>--%>
 </div>
 </body>
 </html>
