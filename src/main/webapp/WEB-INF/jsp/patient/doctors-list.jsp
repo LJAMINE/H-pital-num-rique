@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.clinique.model.Doctor" %>
 <%@ page import="com.clinique.model.Personne" %>
+
 <%
     List<Doctor> doctors = (List<Doctor>) request.getAttribute("doctors");
     Personne patient = (Personne) request.getAttribute("patient");
