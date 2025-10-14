@@ -1,0 +1,292 @@
+/* Admin Dashboard Specific Styles */
+
+/* Quick Stats Cards Animation */
+.stat-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+
+.stat-card:hover::before {
+    left: 100%;
+}
+
+/* Management Cards Enhanced */
+.management-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.management-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #2c5aa0;
+    transition: width 0.3s ease;
+}
+
+.management-card:hover::after {
+    width: 100%;
+}
+
+/* Activity Timeline */
+.activity-item {
+    position: relative;
+}
+
+.activity-item::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 50px;
+    width: 2px;
+    height: calc(100% - 40px);
+    background: #e9ecef;
+}
+
+.activity-item:last-child::before {
+    display: none;
+}
+
+/* Chart Placeholder Enhanced */
+.chart-placeholder {
+    position: relative;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.chart-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(222, 226, 230, 0.3) 10px,
+        rgba(222, 226, 230, 0.3) 20px
+    );
+}
+
+/* Loading Animation for Stats */
+@keyframes pulse-stat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.stat-card.loading .stat-number {
+    animation: pulse-stat 1s ease-in-out infinite;
+}
+
+/* Status Indicators */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-online {
+    background: #28a745;
+    animation: pulse-online 2s infinite;
+}
+
+.status-offline {
+    background: #dc3545;
+}
+
+.status-away {
+    background: #ffc107;
+}
+
+@keyframes pulse-online {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+}
+
+/* Progress Bars for Future Use */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2c5aa0, #4a7bc8);
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+}
+
+/* Quick Action Buttons */
+.quick-actions {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.quick-action-btn {
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #495057;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.quick-action-btn:hover {
+    background: #2c5aa0;
+    color: white;
+    border-color: #2c5aa0;
+}
+
+/* Notification Badge */
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #dc3545;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Data Table Styles for Future Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th,
+.data-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.data-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+.data-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* Mobile Responsive Enhancements */
+@media (max-width: 576px) {
+    .stat-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .management-card {
+        padding: 1rem;
+    }
+    
+    .management-icon {
+        font-size: 2rem;
+    }
+    
+    .chart-container {
+        padding: 1rem;
+    }
+    
+    .chart-placeholder {
+        height: 200px;
+        font-size: 1rem;
+    }
+}
+
+/* Dark Mode Support (Future Enhancement) */
+@media (prefers-color-scheme: dark) {
+    .chart-placeholder {
+        background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+        color: #fff;
+    }
+    
+    .chart-placeholder::before {
+        border-color: #6c757d;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .logout-section,
+    .management-section,
+    .chart-placeholder {
+        display: none;
+    }
+    
+    .stat-card {
+        break-inside: avoid;
+    }
+}
+
+/* Accessibility Enhancements */
+.management-card:focus {
+    outline: 3px solid #2c5aa0;
+    outline-offset: 2px;
+}
+
+.stat-card:focus-within {
+    outline: 2px solid #2c5aa0;
+    outline-offset: 2px;
+}
+
+/* Skeleton Loading Animation (for future async loading) */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

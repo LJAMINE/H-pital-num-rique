@@ -1,75 +1,91 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-    <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f6fa;
-            display: flex;
-            height: 100vh;
-            align-items: center;
-            justify-content: center;
-        }
-        .login-container {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            padding: 32px 24px;
-            min-width: 320px;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 18px;
-            color: #2d3436;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 8px 10px;
-            margin-top: 4px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            width: 100%;
-            background: #0984e3;
-            color: #fff;
-            border: none;
-            padding: 10px 0;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .error {
-            color: #d63031;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Clinique Digital</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/medical-theme.css">
 </head>
 <body>
-<div class="login-container">
-    <h2>Login</h2>
-    <% String error = request.getParameter("error"); %>
-    <% if ("invalid".equals(error)) { %>
-    <div class="error">Invalid email or password.</div>
-    <% } else if ("unknownrole".equals(error)) { %>
-    <div class="error">Unknown user role.</div>
-    <% } %>
-    <form action="login" method="post">
-        <label>Email:
-            <input type="text" name="email" required />
-        </label>
-        <label>Password:
-            <input type="password" name="password" required />
-        </label>
-        <button type="submit">Login</button>
-    </form>
-</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="${pageContext.request.contextPath}/" class="logo">Clinique Digital</a>
+                
+                <div class="auth-buttons">
+                    <a href="${pageContext.request.contextPath}/" class="btn btn-secondary">Retour</a>
+                    <a href="${pageContext.request.contextPath}/register-patient.jsp" class="btn btn-primary">S'inscrire</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Form -->
+    <div style="margin-top: 80px; padding: 2rem 0; min-height: calc(100vh - 80px); display: flex; align-items: center;">
+        <div class="container">
+            <div class="form-container fade-in-up">
+                <h2>🏥 Connexion</h2>
+                
+                <% String error = request.getParameter("error"); %>
+                <% if ("invalid".equals(error)) { %>
+                    <div class="alert alert-error">
+                        Email ou mot de passe incorrect.
+                    </div>
+                <% } else if ("unknownrole".equals(error)) { %>
+                    <div class="alert alert-error">
+                        Rôle utilisateur inconnu.
+                    </div>
+                <% } %>
+                
+                <form action="${pageContext.request.contextPath}/login" method="post">
+                    <div class="form-group">
+                        <label for="email">Adresse Email</label>
+                        <input type="email" id="email" name="email" class="form-control" 
+                               placeholder="Entrez votre email" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Mot de Passe</label>
+                        <input type="password" id="password" name="password" class="form-control" 
+                               placeholder="Entrez votre mot de passe" required />
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Se Connecter</button>
+                </form>
+                
+                <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e9ecef;">
+                    <p>Pas encore de compte ?</p>
+                    <a href="${pageContext.request.contextPath}/register-patient.jsp" 
+                       style="color: #2c5aa0; text-decoration: none; font-weight: 600;">
+                        Créer un compte patient
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Clinique Digital. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add some interactive effects
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>

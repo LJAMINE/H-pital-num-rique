@@ -168,7 +168,7 @@
         </li>
         <% } %>
     </ul>
-    <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
+    <a class="back-link" href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
 
 <%--    <a class="back-link" href="dashboard">Back to Admin Dashboard</a>--%>
 </div>

@@ -37,7 +37,7 @@
     <h2>Add Doctor</h2>
     <form method="post" action="doctor">
         <label>Email: <input type="email" name="email" required></label>
-        <label>Password: <input type="password" name="password" required></label>
+        <label>Password: <input type="text" name="password" required></label>
         <label>First Name: <input type="text" name="prenom" required></label>
         <label>Last Name: <input type="text" name="nom" required></label>
         <label>Speciality: <input type="text" name="specialite"></label>
@@ -51,7 +51,7 @@
         </label>
         <button type="submit">Create Doctor</button>
     </form>
-    <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
+    <a class="back-link" href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
 
 <%--    <a class="back-link" href="dashboard">Back to Admin Dashboard</a>--%>
 </div>

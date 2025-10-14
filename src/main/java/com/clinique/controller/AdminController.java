@@ -32,6 +32,18 @@ public class AdminController extends HttpServlet {
         String path = req.getPathInfo();
 
         if (path == null || "/dashboard".equals(path)) {
+            // TODO: Add statistics data for dashboard
+            // Example:
+            // Long totalPatients = patientService.getTotalPatients();
+            // Long totalDoctors = doctorService.getTotalDoctors();
+            // Long totalDepartments = departementService.getTotalDepartments();
+            // Long todayConsultations = consultationService.getTodayConsultations();
+            // 
+            // req.setAttribute("totalPatients", totalPatients);
+            // req.setAttribute("totalDoctors", totalDoctors);
+            // req.setAttribute("totalDepartments", totalDepartments);
+            // req.setAttribute("todayConsultations", todayConsultations);
+            
             req.getRequestDispatcher("/WEB-INF/jsp/admin/dashboard.jsp").forward(req, resp);
 
         } else if ("/departement".equals(path)) {

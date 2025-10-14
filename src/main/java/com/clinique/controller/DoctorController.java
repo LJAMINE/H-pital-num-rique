@@ -28,9 +28,7 @@ public class DoctorController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        List<Departement> departements = departementService.getAllDepartements();
-//        req.setAttribute("departements", departements);
-//        req.getRequestDispatcher("/WEB-INF/jsp/admin/admin-doctors.jsp").forward(req, resp);
+
 
 
     }
@@ -38,28 +36,6 @@ public class DoctorController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        String email=req.getParameter("email");
-//        String password=req.getParameter("password");
-//        String prenom=req.getParameter("prenom");
-//        String nom=req.getParameter("nom");
-//        String specialite=req.getParameter("specialite");
-//
-//        Long departementId = Long.valueOf(req.getParameter("departementId"));
-//
-//        Departement departement = departementService.getDepartement(departementId);
-//
-//        Doctor doctor=new Doctor();
-//        doctor.setEmail(email);
-//        doctor.setMotDePasse(password);
-//        doctor.setPrenom(prenom);
-//        doctor.setNom(nom);
-//        doctor.setSpecialite(specialite);
-//        doctor.setDepartement(departement);
-//
-//        doctor.setRole(Role.DOCTOR);
-//        doctorService.addDoctor(doctor);
-//
-//        resp.sendRedirect("doctor");
 
     }
 }

@@ -36,7 +36,8 @@ import java.io.IOException;
             // Forward based on role
             switch (user.getRole()) {
                 case PATIENT:
-                    request.getRequestDispatcher("/WEB-INF/jsp/patient/dashboard.jsp").forward(request, response);
+                    // Redirect patients to homepage with login session
+                    response.sendRedirect(request.getContextPath() + "/");
                     break;
                 case DOCTOR:
                     request.getRequestDispatcher("/WEB-INF/jsp/doctor/dashboard.jsp").forward(request, response);
