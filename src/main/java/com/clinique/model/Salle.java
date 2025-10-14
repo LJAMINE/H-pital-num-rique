@@ -16,6 +16,10 @@ public class Salle{
     @OneToMany(mappedBy = "salle")
     private List<Consultation> consultations;
 
+    // New field for departement association!
+    @ManyToOne
+    @JoinColumn(name = "departement_id")
+    private Departement departement;
 
 
     //--------------------getter and setters-------------------

@@ -20,6 +20,9 @@ public class Departement {
     @OneToMany(mappedBy = "departement")
     private List<Consultation> consultations;
 
+     @OneToMany(mappedBy = "departement")
+    private List<Salle> salles;
+
 
 
 //--------------------getter and setters-------------------

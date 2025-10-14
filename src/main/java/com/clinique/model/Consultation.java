@@ -34,9 +34,9 @@ public class Consultation {
     @JoinColumn(name = "salle_id")
     private Salle salle;
 
-    @ManyToOne
-    @JoinColumn(name = "departement_id")
-    private Departement departement;
+//    @ManyToOne
+//    @JoinColumn(name = "departement_id")
+//    private Departement departement;
 
 
 //--------------------getter and setters-------------------
@@ -93,13 +93,7 @@ public class Consultation {
         this.compteRendu = compteRendu;
     }
 
-    public Departement getDepartement() {
-        return departement;
-    }
 
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
-    }
 
     public Long getId() {
         return id;
