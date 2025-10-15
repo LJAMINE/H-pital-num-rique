@@ -17,6 +17,7 @@ public class Availability {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
+
     @ManyToOne
     private Doctor doctor;
 
@@ -25,6 +26,13 @@ public class Availability {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
     public LocalDateTime getStartTime() { return startTime; }
     public void setStartTime(LocalDateTime startTime) { this.startTime = startTime; }
 
