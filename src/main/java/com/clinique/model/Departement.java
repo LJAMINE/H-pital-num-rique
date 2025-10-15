@@ -17,11 +17,12 @@ public class Departement {
     @OneToMany(mappedBy = "departement")
     private List<Doctor> doctors;
 
-    @OneToMany(mappedBy = "departement")
-    private List<Consultation> consultations;
+//    @OneToMany(mappedBy = "departement")
+//    private List<Consultation> consultations;
 
      @OneToMany(mappedBy = "departement")
     private List<Salle> salles;
+
 
 
 
@@ -43,13 +44,7 @@ public class Departement {
         this.doctors = doctors;
     }
 
-    public List<Consultation> getConsultations() {
-        return consultations;
-    }
 
-    public void setConsultations(List<Consultation> consultations) {
-        this.consultations = consultations;
-    }
 
 
     public Long getIdDepartement() {

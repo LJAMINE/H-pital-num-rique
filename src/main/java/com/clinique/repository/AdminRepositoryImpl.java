@@ -1,14 +1,16 @@
 package com.clinique.repository;
 
 import com.clinique.model.Admin;
+import com.clinique.util.JPAUtil;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
+@Dependent
+@Named
 public class AdminRepositoryImpl extends GenericRepositoryImpl<Admin, Long> implements AdminRepository {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("cliniquePU");
     private static EntityManager createEntityManager() {
-        return emf.createEntityManager();
+        return JPAUtil.getEntityManagerFactory().createEntityManager();
     }
 
     public AdminRepositoryImpl() {

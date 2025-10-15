@@ -3,8 +3,10 @@ package com.clinique.controller;
 import com.clinique.model.Departement;
 import com.clinique.model.Doctor;
 import com.clinique.model.Role;
+import com.clinique.model.Salle;
 import com.clinique.service.DepartementService;
 import com.clinique.service.DoctorService;
+import com.clinique.service.SalleService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +23,8 @@ public class AdminController extends HttpServlet {
     private DepartementService departementService;
     @Inject
     private DoctorService doctorService;
+    @Inject
+    private SalleService salleService;
 
 
 
@@ -32,18 +36,8 @@ public class AdminController extends HttpServlet {
         String path = req.getPathInfo();
 
         if (path == null || "/dashboard".equals(path)) {
-            // TODO: Add statistics data for dashboard
-            // Example:
-            // Long totalPatients = patientService.getTotalPatients();
-            // Long totalDoctors = doctorService.getTotalDoctors();
-            // Long totalDepartments = departementService.getTotalDepartments();
-            // Long todayConsultations = consultationService.getTodayConsultations();
-            // 
-            // req.setAttribute("totalPatients", totalPatients);
-            // req.setAttribute("totalDoctors", totalDoctors);
-            // req.setAttribute("totalDepartments", totalDepartments);
-            // req.setAttribute("todayConsultations", todayConsultations);
-            
+//           stats
+
             req.getRequestDispatcher("/WEB-INF/jsp/admin/dashboard.jsp").forward(req, resp);
 
         } else if ("/departement".equals(path)) {
@@ -65,7 +59,19 @@ public class AdminController extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/admin/doctors-list.jsp").forward(req, resp);
 
         }
-     }
+        else if ("/salle".equals(path)) {
+            List<Departement> departements = departementService.getAllDepartements();
+            req.setAttribute("departements", departements);
+            req.getRequestDispatcher("/WEB-INF/jsp/admin/admin-salles.jsp").forward(req, resp);
+
+        }else if ("/salle-list".equals(path)) {
+            List<Salle> salles = salleService.getAllSalle();
+            List<Departement> departements = departementService.getAllDepartements();
+            req.setAttribute("salles", salles);
+            req.setAttribute("departements", departements);
+            req.getRequestDispatcher("/WEB-INF/jsp/admin/salles-list.jsp").forward(req, resp);
+        }
+    }
 
 
     @Override
@@ -119,6 +125,37 @@ public class AdminController extends HttpServlet {
             doctorService.addDoctor(doctor);
 
             resp.sendRedirect(req.getContextPath() + "/admin/doctor-list");
+        }
+        else if ("/salle".equals(path)) {
+            String action = req.getParameter("action");
+            String nomSalle = req.getParameter("nomSalle");
+            String capaciteParam = req.getParameter("capacite");
+            String idParam = req.getParameter("idSalle");
+            String departementIdParam = req.getParameter("departementId");
+
+            Integer capacite = capaciteParam != null ? Integer.valueOf(capaciteParam) : null;
+            Integer idSalle = idParam != null ? Integer.valueOf(idParam) : null;
+            Long departementId = departementIdParam != null ? Long.valueOf(departementIdParam) : null;
+            Departement departement = departementId != null ? departementService.getDepartement(departementId) : null;
+
+            if ("update".equals(action) && idSalle != null) {
+                Salle salle = salleService.getSalle(idSalle);
+                if (salle != null) {
+                    salle.setNomSalle(nomSalle);
+                    salle.setCapacite(capacite);
+                    salle.setDepartement(departement);
+                    salleService.updateSalle(salle);
+                }
+            } else if ("delete".equals(action) && idSalle != null) {
+                salleService.deleteSalle(idSalle);
+            } else if (nomSalle != null && capacite != null && departement != null) {
+                Salle salle = new Salle();
+                salle.setNomSalle(nomSalle);
+                salle.setCapacite(capacite);
+                salle.setDepartement(departement);
+                salleService.addSalle(salle);
+            }
+            resp.sendRedirect(req.getContextPath() + "/admin/salle-list");
         }
     }
 }

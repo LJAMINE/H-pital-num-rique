@@ -312,6 +312,12 @@
                         <h4>Doctors List</h4>
                         <p>View all registered doctors</p>
                     </a>
+
+                    <a href="${pageContext.request.contextPath}/admin/salle" class="management-card">
+                        <div class="management-icon" style="background: #17a2b8; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem;">L</div>
+                        <h4>Manage salle</h4>
+                        <p>Add and manage salle </p>
+                    </a>
                 </div>
             </div>
         </div>

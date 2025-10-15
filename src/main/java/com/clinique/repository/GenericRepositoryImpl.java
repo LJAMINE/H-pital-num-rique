@@ -34,26 +34,44 @@ public class GenericRepositoryImpl<T, ID> implements GenericRepository<T, ID> {
 
     @Override
     public void save(T entity) {
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
+        if (em == null) throw new IllegalStateException("EntityManager is null");
+        try {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        } catch (RuntimeException ex) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw ex;
+        }
     }
 
     @Override
     public T update(T entity) {
-        em.getTransaction().begin();
-        T merged = em.merge(entity);
-        em.getTransaction().commit();
-        return merged;
+        if (em == null) throw new IllegalStateException("EntityManager is null");
+        try {
+            em.getTransaction().begin();
+            T merged = em.merge(entity);
+            em.getTransaction().commit();
+            return merged;
+        } catch (RuntimeException ex) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw ex;
+        }
     }
 
     @Override
     public void delete(ID id) {
-        em.getTransaction().begin();
-        T entity = findById(id);
-        if (entity != null) {
-            em.remove(entity);
+        if (em == null) throw new IllegalStateException("EntityManager is null");
+        try {
+            em.getTransaction().begin();
+            T entity = findById(id);
+            if (entity != null) {
+                em.remove(entity);
+            }
+            em.getTransaction().commit();
+        } catch (RuntimeException ex) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw ex;
         }
-        em.getTransaction().commit();
     }
 }

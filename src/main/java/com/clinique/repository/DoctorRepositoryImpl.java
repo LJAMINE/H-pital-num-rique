@@ -1,20 +1,16 @@
 package com.clinique.repository;
 
 import com.clinique.model.Doctor;
-import com.clinique.model.Patient;
 import com.clinique.util.JPAUtil;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.NoResultException;
 
 @Dependent
 @Named
 public class DoctorRepositoryImpl extends GenericRepositoryImpl<Doctor, Long> implements DoctorRepository {
     private static EntityManager createEntityManager() {
-
         // Use the shared singleton factory
         return JPAUtil.getEntityManagerFactory().createEntityManager();
     }

@@ -12,6 +12,11 @@
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
     </listener>
 
+    <!-- Ensure JPA EMF initializes after CDI -->
+    <listener>
+        <listener-class>com.clinique.listener.JpaInitListener</listener-class>
+    </listener>
+
     <!-- Example servlet mapping, adjust for your app -->
     <!--
     <servlet>
@@ -23,5 +28,9 @@
         <url-pattern>/myservlet</url-pattern>
     </servlet-mapping>
     -->
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>

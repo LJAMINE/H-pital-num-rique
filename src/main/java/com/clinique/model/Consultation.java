@@ -35,7 +35,7 @@ public class Consultation {
     private Salle salle;
 
 //    @ManyToOne
-//    @JoinColumn(name = "departement_id")
+//    @JoinColumn(name = "departement_id") // optional, but useful
 //    private Departement departement;
 
 

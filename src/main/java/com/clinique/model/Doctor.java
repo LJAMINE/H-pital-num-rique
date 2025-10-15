@@ -18,10 +18,15 @@ public class Doctor extends Personne{
     @OneToMany(mappedBy="doctor")
     private List<Consultation> planning;
 
+    @OneToMany(mappedBy = "doctor")
+    private List<Availability> availabilities;
+
 
 
     //--------------------getter and setters-------------------
 
+     public List<Availability> getAvailabilities() { return availabilities; }
+    public void setAvailabilities(List<Availability> availabilities) { this.availabilities = availabilities; }
 
 
 

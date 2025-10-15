@@ -11,10 +11,6 @@ import jakarta.persistence.*;
 @Named
 public class PatientRepositoryImpl extends GenericRepositoryImpl<Patient, Long> implements PatientRepository {
 
-
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("cliniquePU");
-
-
     private static EntityManager createEntityManager() {
         // Use the shared singleton factory
         return JPAUtil.getEntityManagerFactory().createEntityManager();

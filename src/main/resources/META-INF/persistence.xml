@@ -7,9 +7,11 @@
         <class>com.clinique.model.Consultation</class>
         <class>com.clinique.model.Departement</class>
         <class>com.clinique.model.Salle</class>
+        <class>com.clinique.model.Availability</class>
+
 
         <properties>
-<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/clinique"/>-->
+            <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/clinique"/>-->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql-db:3306/clinique"/>
             <property name="javax.persistence.jdbc.user" value="clinique_user"/>
             <property name="javax.persistence.jdbc.password" value="clinique_pass"/>

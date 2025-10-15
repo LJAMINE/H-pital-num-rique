@@ -32,8 +32,8 @@
                 <p style="text-align: center; color: #666; margin-bottom: 2rem;">
                     Créez votre compte pour accéder à nos services médicaux
                 </p>
-                
-                <form method="post" action="${pageContext.request.contextPath}/register-patient">
+
+                <form method="post" action="${pageContext.request.contextPath}/register">
                     <div class="form-group">
                         <label for="email">Adresse Email *</label>
                         <input type="email" id="email" name="email" class="form-control" 

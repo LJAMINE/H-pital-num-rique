@@ -16,10 +16,20 @@ public class Salle{
     @OneToMany(mappedBy = "salle")
     private List<Consultation> consultations;
 
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
     // New field for departement association!
     @ManyToOne
     @JoinColumn(name = "departement_id")
     private Departement departement;
+
+
 
 
     //--------------------getter and setters-------------------
