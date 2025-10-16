@@ -10,6 +10,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Dependent
@@ -63,5 +64,17 @@ public class SalleService {
             throw new SalleNotFoundException("Salle  not found for deletion.");
         }
         salleRepository.delete(id);
+    }
+
+    public Salle findAvailableSalle(Long departementId, LocalDateTime dateTime) {
+        List<Salle> salles = salleRepository.findByDepartementId(departementId);
+        for (Salle salle : salles) {
+            boolean isFree = salle.getConsultations().stream()
+                    .noneMatch(c -> c.getDateTime().equals(dateTime));
+            if (isFree) {
+                return salle;
+            }
+        }
+        return null;
     }
 }

@@ -38,4 +38,7 @@ public class ConsultationService {
         return consultationRepository.findById(id);
     }
 
+    public List<Consultation> getConsultationsForPatient(Long patientId) {
+        return consultationRepository.findByPatientId(patientId);
+    }
 }

@@ -1,6 +1,7 @@
 package com.clinique.controller;
 
 import com.clinique.model.*;
+import com.clinique.service.ConsultationService;
 import com.clinique.service.DoctorService;
 import com.clinique.service.SlotService;
 import jakarta.inject.Inject;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,9 @@ public class PatientController extends HttpServlet {
 
     @Inject
     private DoctorService doctorService;
+
+    @Inject
+    private ConsultationService consultationService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -56,11 +61,11 @@ public class PatientController extends HttpServlet {
             LocalDate weekstart = LocalDate.now();
             LocalDate weekEnd = weekstart.plusDays(6);
 
-            SlotService slotService=new SlotService();
-            List<Slot>allSlots=new ArrayList<>();
+            SlotService slotService = new SlotService();
+            List<Slot> allSlots = new ArrayList<>();
 
-            for (Availability a : availabilities){
-                allSlots.addAll(slotService.generateSlotsForAvailability(a,weekstart,weekEnd));
+            for (Availability a : availabilities) {
+                allSlots.addAll(slotService.generateSlotsForAvailability(a, weekstart, weekEnd));
             }
 
             // Get already booked consultations (not cancelled)
@@ -69,12 +74,18 @@ public class PatientController extends HttpServlet {
             );
             List<Slot> availableSlots = slotService.filterBookedSlots(allSlots, consultations);
 
-            req.setAttribute("doctor",doctor);
-            req.setAttribute("slots",availableSlots);
-            req.setAttribute("patient",user);
+            req.setAttribute("doctor", doctor);
+            req.setAttribute("slots", availableSlots);
+            req.setAttribute("patient", user);
             req.getRequestDispatcher("/WEB-INF/jsp/patient/doctor-slots.jsp").forward(req, resp);
 
-        } else {
+        }
+        else if ("/consultations".equals(path)) {
+            List<Consultation> consultations = consultationService.getConsultationsForPatient(user.getId());
+            req.setAttribute("consultations", consultations);
+            req.getRequestDispatcher("/WEB-INF/jsp/patient/consultations.jsp").forward(req, resp);
+        }
+        else {
             //   patient dashboard
             resp.sendRedirect(req.getContextPath() + "/");
         }
@@ -84,6 +95,36 @@ public class PatientController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        HttpSession session = req.getSession();
+        Personne user = (Personne) session.getAttribute("user");
 
+        if (user == null || user.getRole() != Role.PATIENT) {
+            resp.sendRedirect(req.getContextPath() + "/login.jsp?error=unauthorized");
+            return;
+        }
+        String path = req.getPathInfo();
+
+
+        if ("/book".equals(path)) {
+            // Read parameters from the form
+            Long doctorId = Long.valueOf(req.getParameter("doctorId"));
+            String slotStartStr = req.getParameter("slotStart");
+            LocalDateTime slotStart = LocalDateTime.parse(slotStartStr);
+
+            Doctor doctor = doctorService.getDoctor(doctorId);
+
+            Consultation consultation = new Consultation();
+            consultation.setDoctor(doctor);
+            consultation.setPatient((Patient) user);
+            consultation.setDateTime(slotStart);
+            consultation.setStatus(StatusConsultation.RESERVEE);
+
+            // salle
+
+             consultationService.save(consultation);
+
+             resp.sendRedirect(req.getContextPath() + "/patient/consultations?success=true");
+            return;
+        }
     }
 }

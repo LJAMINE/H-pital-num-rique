@@ -39,7 +39,14 @@ public class ConsultationRepositoryImpl extends GenericRepositoryImpl<Consultati
                 .setParameter("status", status)
                 .getResultList();
     }
-
+    @Override
+    public List<Consultation> findByPatientId(Long patientId) {
+        return em.createQuery(
+                        "SELECT c FROM Consultation c WHERE c.patient.id = :patientId ORDER BY c.dateTime DESC",
+                        Consultation.class)
+                .setParameter("patientId", patientId)
+                .getResultList();
+    }
 
 
 }

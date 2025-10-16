@@ -10,6 +10,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 
+import java.util.List;
+
 
 @Dependent
 @Named
@@ -33,6 +35,15 @@ public class SalleRepositoryImpl extends GenericRepositoryImpl<Salle, Integer> i
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Salle> findByDepartementId(Long departementId) {
+        return em.createQuery(
+                        "SELECT s FROM Salle s WHERE s.departement.idDepartement = :departementId",
+                        Salle.class)
+                .setParameter("departementId", departementId)
+                .getResultList();
     }
 
 
