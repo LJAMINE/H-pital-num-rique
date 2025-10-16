@@ -198,12 +198,11 @@
                             <div class="doctor-department">
                                 Département: <%= doctor.getDepartement() != null ? doctor.getDepartement().getNom() : "Non spécifié" %>
                             </div>
-                            
-                            <button class="appointment-btn" 
-                                    data-doctor-id="<%= doctor.getId() %>" 
-                                    data-doctor-name="Dr. <%= doctor.getPrenom() %> <%= doctor.getNom() %>">
+
+                            <a href="${pageContext.request.contextPath}/patient/doctor?id=<%= doctor.getId() %>"
+                               class="appointment-btn">
                                 Prendre Rendez-vous
-                            </button>
+                            </a>
                         </div>
                     <% } %>
                 </div>

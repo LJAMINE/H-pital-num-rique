@@ -7,6 +7,7 @@ public interface DoctorRepository extends GenericRepository<Doctor,Long> {
 //    doc methdo
 
     Doctor findByEmail(String email);
+    Doctor findById(Long id);
 
 
 

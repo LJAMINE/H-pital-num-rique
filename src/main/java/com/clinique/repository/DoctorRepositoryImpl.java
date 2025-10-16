@@ -14,6 +14,7 @@ public class DoctorRepositoryImpl extends GenericRepositoryImpl<Doctor, Long> im
         // Use the shared singleton factory
         return JPAUtil.getEntityManagerFactory().createEntityManager();
     }
+
     public DoctorRepositoryImpl() {
         super(Doctor.class, createEntityManager());
     }
@@ -25,6 +26,18 @@ public class DoctorRepositoryImpl extends GenericRepositoryImpl<Doctor, Long> im
             return em.createQuery(
                             "SELECT d FROM Doctor d WHERE d.email = :email", Doctor.class)
                     .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Doctor findById(Long id) {
+        try {
+            return em.createQuery(
+                            "SELECT d FROM Doctor d WHERE d.id   = :id", Doctor.class)
+                    .setParameter("id", id)
                     .getSingleResult();
         } catch (NoResultException e) {
             return null;

@@ -37,7 +37,7 @@
         <p><strong>Email:</strong> <%= user.getEmail() %></p>
         <hr>
         <a href="${pageContext.request.contextPath}/doctor/availabilities" class="btn btn-primary btn-large mb-3">
-            Gérer mes disponibilités
+            gerer availability
         </a>
         <br>
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-secondary btn-sm">logout</a>

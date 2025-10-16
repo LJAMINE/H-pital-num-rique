@@ -1,11 +1,18 @@
 package com.clinique.service;
 
+import com.clinique.model.Availability;
+import com.clinique.model.Consultation;
 import com.clinique.model.Doctor;
+import com.clinique.model.StatusConsultation;
+import com.clinique.repository.AvailabilityRepository;
+import com.clinique.repository.ConsultationRepository;
 import com.clinique.repository.DoctorRepository;
 import com.clinique.exception.DoctorNotFoundException;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Dependent
@@ -13,6 +20,13 @@ import java.util.List;
 public class DoctorService {
     @Inject
     private DoctorRepository doctorRepository;
+
+
+    @Inject
+    private AvailabilityRepository availabilityRepository;
+
+    @Inject
+    private ConsultationRepository consultationRepository;
 
     public List<Doctor> getAllDoctors() {
         return doctorRepository.findAll();
@@ -25,7 +39,6 @@ public class DoctorService {
         }
         return doctor;
     }
-
      public Doctor addDoctor(Doctor doctor) {
         if (doctor == null || doctor.getEmail() == null || doctor.getMotDePasse() == null) {
             throw new IllegalArgumentException("Doctor email and password are required.");
@@ -56,4 +69,16 @@ public class DoctorService {
         }
         doctorRepository.delete(id);
     }
+
+    public List<Availability> getAvailabilitiesForDoctor(Long doctorId) {
+        return availabilityRepository.findByDoctorId(doctorId);
+    }
+
+    public List<Consultation> getConsultationsForDoctorBetween(Long doctorId, LocalDateTime start, LocalDateTime end) {
+        return consultationRepository.findByDoctorIdAndDateTimeBetweenAndStatusNot(
+                doctorId, start, end, StatusConsultation.ANNULEE);
+    }
+
+
+
 }
