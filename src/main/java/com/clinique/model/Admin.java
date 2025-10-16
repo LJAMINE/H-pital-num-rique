@@ -6,6 +6,4 @@ import jakarta.persistence.*;
 
 public class Admin extends Personne {
 
-
-
 }

@@ -7,7 +7,6 @@
         <class>com.clinique.model.Consultation</class>
         <class>com.clinique.model.Departement</class>
         <class>com.clinique.model.Salle</class>
-        <class>com.clinique.model.Availability</class>
 
 
         <properties>
