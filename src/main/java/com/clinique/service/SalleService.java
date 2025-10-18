@@ -21,6 +21,9 @@ public class SalleService {
     @Inject
     private SalleRepository salleRepository;
 
+    @Inject
+    private ConsultationService consultationService;
+
     public List<Salle> getAllSalle() {
         return salleRepository.findAll();
     }
@@ -77,4 +80,11 @@ public class SalleService {
         }
         return null;
     }
+
+
+    public List<Salle>getSallesForDepartement(Long departementId){
+        return salleRepository.findByDepartementId(departementId);
+
+    }
+
 }

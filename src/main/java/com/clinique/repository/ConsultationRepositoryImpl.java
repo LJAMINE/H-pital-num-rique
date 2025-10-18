@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-
 @Dependent
 @Named
 public class ConsultationRepositoryImpl extends GenericRepositoryImpl<Consultation, Long> implements ConsultationRepository {
@@ -24,6 +23,7 @@ public class ConsultationRepositoryImpl extends GenericRepositoryImpl<Consultati
         // Use the shared singleton factory
         return JPAUtil.getEntityManagerFactory().createEntityManager();
     }
+
     public ConsultationRepositoryImpl() {
         super(Consultation.class, createEntityManager());
     }
@@ -39,6 +39,7 @@ public class ConsultationRepositoryImpl extends GenericRepositoryImpl<Consultati
                 .setParameter("status", status)
                 .getResultList();
     }
+
     @Override
     public List<Consultation> findByPatientId(Long patientId) {
         return em.createQuery(
@@ -48,5 +49,23 @@ public class ConsultationRepositoryImpl extends GenericRepositoryImpl<Consultati
                 .getResultList();
     }
 
+
+    @Override
+    public List<Consultation> findByDoctorIdAndStatus(Long doctorId, StatusConsultation status) {
+        return em.createQuery("SELECT c FROM Consultation c WHERE c.doctor.id = :docId AND c.status = :status ORDER BY c.dateTime ASC", Consultation.class)
+                .setParameter("docId", doctorId)
+                .setParameter("status", status)
+                .getResultList();
+    }
+
+
+    @Override
+    public List<Consultation> findBySalleIdAndDateTime(Long salleId, LocalDateTime dateTime) {
+        return em.createQuery("SELECT c FROM Consultation c WHERE c.salle.idSalle = :salleId AND c.dateTime = :dt AND c.status <> :annule", Consultation.class)
+                .setParameter("salleId", salleId)
+                .setParameter("dt", dateTime)
+                .setParameter("annule", StatusConsultation.ANNULEE)
+                .getResultList();
+    }
 
 }

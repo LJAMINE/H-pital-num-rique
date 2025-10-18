@@ -39,6 +39,10 @@
         <a href="${pageContext.request.contextPath}/doctor/availabilities" class="btn btn-primary btn-large mb-3">
             gerer availability
         </a>
+
+        <a href="${pageContext.request.contextPath}/doctor/consultations" class="btn btn-primary btn-large mb-3">
+            gerer consultation
+        </a>
         <br>
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-outline-secondary btn-sm">logout</a>
     </div>

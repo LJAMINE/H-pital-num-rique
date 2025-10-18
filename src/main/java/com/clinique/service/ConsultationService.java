@@ -41,4 +41,15 @@ public class ConsultationService {
     public List<Consultation> getConsultationsForPatient(Long patientId) {
         return consultationRepository.findByPatientId(patientId);
     }
+
+
+    public List<Consultation> findByDoctorAndStatus(Long doctorId, StatusConsultation status) {
+        return consultationRepository.findByDoctorIdAndStatus(doctorId, status);
+    }
+
+
+
+    public boolean isSalleAvailableForSlot(Integer salleId, java.time.LocalDateTime dateTime) {
+         return consultationRepository.findBySalleIdAndDateTime(Long.valueOf(salleId), dateTime).isEmpty();
+    }
 }

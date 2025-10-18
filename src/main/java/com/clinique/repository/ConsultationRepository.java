@@ -10,4 +10,7 @@ public interface ConsultationRepository extends GenericRepository<Consultation, 
     List<Consultation> findByDoctorIdAndDateTimeBetweenAndStatusNot(Long doctorId, LocalDateTime start, LocalDateTime end, StatusConsultation status);
     List<Consultation> findByPatientId(Long patientId);
 
+    List<Consultation> findBySalleIdAndDateTime(Long salleId, LocalDateTime dateTime);
+    List<Consultation> findByDoctorIdAndStatus(Long doctorId, StatusConsultation status);
+
 }
